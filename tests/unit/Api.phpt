@@ -46,10 +46,9 @@ $api = new Api(DEEPL_API_KEY, true, $wrapper);
 Assert::same('https://api-free.deepl.com/v2/translate', $api->getEndpoint());
 
 // --- TEST Api::translate()
-$response = $api->translate('Text to be translated', Language::CZECH);
-Assert::type(Response::class, $response);
-Assert::same('Text, který má být přeložen', $response->getTranslations()[0]->getText());
-Assert::same(Language::ENGLISH, $response->getTranslations()[0]->getDetectedSourceLanguage());
+$translation = $api->translate('Text to be translated', Language::CZECH);
+Assert::type(Response::class, $translation);
+Assert::same('Text, který má být přeložen', $translation->getText());
 
 $request = new Request('Text to be translated', Language::CZECH, Language::ENGLISH);
 $request->formality(Formality::LESS_FORMAL);
@@ -61,6 +60,7 @@ $request->splitSentences(SplitSentences::NO_NEW_LINES);
 $response = $api->send($request);
 Assert::type(Response::class, $response);
 Assert::same('Text, který má být přeložen', $response->getTranslations()[0]->getText());
+Assert::same(Language::ENGLISH, $response->getTranslations()[0]->getDetectedSourceLanguage());
 
 
 // --- clean up

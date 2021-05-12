@@ -31,4 +31,15 @@ class Response
 	{
 		return $this->translations;
 	}
+
+	public function getText(): string
+	{
+		$output = [];
+		foreach ($this->getTranslations() as $translation)
+		{
+			$output[] = $translation->getText();
+		}
+
+		return implode("\n", $output);
+	}
 }

@@ -42,3 +42,5 @@ $response = Response::fromJson($jsonResponse);
 Assert::type(Response::class, $response);
 Assert::count(3, $response->getTranslations());
 Assert::same('Dies ist der dritte Satz.', $response->getTranslations()[2]->getText());
+
+Assert::same("Das ist der erste Satz.\nDas ist der zweite Satz.\nDies ist der dritte Satz.", $response->getText());
